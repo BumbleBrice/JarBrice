@@ -1,6 +1,7 @@
-const API_KEY = localStorage.getItem("API_KEY") 
+const API_KEY = localStorage.getItem("API_KEY")
 const submitButton = document.getElementById("submit")
 const inputElement = document.querySelector("input")
+const bot = document.getElementById("bot")
 
 function getMessage() {
     console.log("Click ok ma gueule");
@@ -9,10 +10,12 @@ function getMessage() {
 
     recognition.onstart = () => {
         console.log("Micro à l'écoute, envoie ton flow baby");
+        bot.classList.replace("neutral", "listening")
     };
 
     recognition.onspeechend = () => {
         console.log("ouch merci !");
+        bot.classList.replace("listening", "computing")
         recognition.stop();
     };
 
@@ -25,7 +28,7 @@ function getMessage() {
 }
 
 async function speechResponse(postResult) {
-    console.log("clicked")
+    console.log("shearch in API")
     const options = {
         method: 'POST',
         headers: {
@@ -39,22 +42,25 @@ async function speechResponse(postResult) {
         })
     }
     try {
-
-
         const response = await fetch('https://api.openai.com/v1/chat/completions', options)
         const data = await response.json()
         console.log(data)
+        bot.classList.replace("computing", "speaking")
         if ('speechSynthesis' in window) {
             const speech = new SpeechSynthesisUtterance();
             speech.lang = 'fr-FR';
             speech.text = data.choices[0].message.content
             speechSynthesis.speak(speech);
+            speech.onend = () => {
+                bot.classList.replace("speaking", "neutral");
+            };
         } else {
             console.log('L\'API Web Speech n\'est pas supportée par ce navigateur.');
         }
         if (data.choices[0].message.content) {
-          console.log(data.choices[0].message.content)
+            console.log(data.choices[0].message.content)
         }
+
     } catch (error) {
         console.error(error)
     }

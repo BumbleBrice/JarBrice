@@ -1,26 +1,36 @@
 <!DOCTYPE html>
 <html lang="fr-FR">
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title></title>
-	<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400&display=swap" rel="stylesheet">
 
-	<link rel="stylesheet" href="assets/css/styles.css">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
 </head>
+
 <body>
-	<main>
-		<h1>JarBriceGPT</h1>
-		<p id="output"></p>
-		<div class="button-section">
-			<div class="input-cotainer">
-				<input type="hidden">
-				<div id="submit">
-					<img class="robot" src="assets/img/un-message.png" alt="">
-				</div>
-			</div>
-		</div>
-	</main>
-<script type="text/javascript" src="assets/js/app.js"></script>
+    <main id="submit">
+        <div id="bot" class="neutral">
+            <div id="head">
+                <div id="left-ear">
+                    <div id="left-ear-inner"></div>
+                </div>
+                <div id="face">
+                    <div id="eyes">
+                        <div id="left-eye"></div>
+                        <div id="right-eye"></div>
+                    </div>
+                    <div id="mouth"></div>
+                </div>
+                <div id="right-ear">
+                    <div id="right-ear-inner"></div>
+                </div>
+            </div>
+        </div>
+        <input type="hidden">
+    </main>
+    <script type="text/javascript" src="assets/js/app.js"></script>
 </body>
+
 </html>

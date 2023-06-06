@@ -1,64 +1,296 @@
 * {
-	color: #fff;
-	background-color: #343541;
-	margin: 0;
-	padding:0;
-	font-family: 'Josefin Sans', sans-serif;
+    color: #fff;
+    background-color: #343541;
+    margin: 0;
+    padding: 0;
+    font-family: 'Josefin Sans', sans-serif;
 
 }
+
 body {
-	display: flex;
+    display: flex;
 }
+
 h1 {
-	font-size: 33px;
-	font-weight: 400;
-	padding: 30px 0;
-}
-.side-bar {
-	background-color: #202123;
-	width:244px;
-	height:100vh;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	text-align: center;
+    font-size: 33px;
+    font-weight: 400;
+    padding: 30px 0;
 }
 
 main {
-	display: flex;
-	flex-direction:column;
-	align-items: center;
-	text-align:center;
-	justify-content: space-between;
-	height: 100vh;
-  width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100vh;
+    width: 100%;
 }
 
 
-.input-cotainer {
-	display: flex;
-	position: relative;
+#bot {
+    position: relative;
+    text-align: left;
+    width: 24em;
+    height: 24em;
+    min-width: 10em;
+    min-height: 10em;
+    margin: 0 auto;
 }
-#submit {
-	width:100%;
-	display:flex;
-	justify-content:center;
-}
-#submit img {
-	width: 20%;
-	padding-bottom: 100px;
-}
-#submit img:hover {
-	cursor:pointer;
-}
-.button-section {
-	width: 100%;
-}
-.history {
-	padding: 10px;
-	margin: 10px;
-	display: flex;
-	flex-direction: column;
-	height:100%;
 
+#head {
+    position: relative;
+    display: inline-block;
+    margin-top: 15%;
+    margin-left: 10%;
+    width: 80%;
+    height: 70%;
+}
+
+#face {
+    position: absolute;
+    margin-left: 0%;
+    margin-right: 0%;
+    width: 100%;
+    height: 100%;
+    border: 0.4em solid #FFF;
+    border-radius: 40% 40% 50% 50%;
+}
+
+#left-ear,
+#right-ear {
+    position: absolute;
+    top: 33%;
+    width: 6%;
+    height: 25%;
+    border: 0.15em solid #FFF;
+    background-color: lightgray;
+    border-radius: 0.1em;
+}
+
+#left-ear {
+    left: -6%;
+}
+
+#right-ear {
+    right: -10%;
+}
+
+#left-ear-inner,
+#right-ear-inner {
+    position: absolute;
+    top: 20%;
+    width: 100%;
+    height: 60%;
+    background-color: lightgray;
+    border-radius: 0.1em;
+}
+
+#left-ear-inner {
+    left: -150%;
+}
+
+#right-ear-inner {
+    right: -150%;
+}
+
+#eyes {
+    position: absolute;
+    width: 70%;
+    height: 20%;
+    margin-left: 16%;
+    margin-top: 20%;
+
+}
+
+#left-eye,
+#right-eye {
+    position: absolute;
+    width: 35%;
+    height: 100%;
+    background-color: lightseagreen;
+}
+
+#left-eye {
+    border-radius: 28% 50% 40% 70%;
+}
+
+#right-eye {
+    border-radius: 50% 28% 70% 40%;
+}
+
+#right-eye {
+    right: 0%;
+}
+
+#mouth {
+    position: absolute;
+    width: 30%;
+    height: 4%;
+    border-left: 0.2em solid #FFF;
+    border-right: 0.2em solid #FFF;
+    border-bottom: 0.2em solid #FFF;
+    border-top: 0.0em solid #FFF;
+    border-radius: 0.5em;
+    left: 35%;
+    bottom: 20%;
+}
+
+/* Animations */
+#bot.neutral #left-eye,
+#bot.neutral #right-eye {
+    animation: blink-eyes 3s infinite ease-in alternate;
+    animation-delay: 2s;
+}
+
+#bot.neutral #left-ear-inner {
+    animation: move-left-ear-inner 5.0s infinite ease alternate;
+}
+
+#bot.neutral #right-ear-inner {
+    animation: move-right-ear-inner 5.0s infinite ease alternate;
+}
+
+@keyframes blink-eyes {
+    0% {
+        height: 10%;
+        margin-top: 10%
+    }
+
+    10% {
+        height: 100%;
+        margin-top: 0%
+    }
+
+    100% {
+        height: 100%;
+        margin-top: 0%
+    }
+}
+
+/* Speaking */
+#bot.speaking #mouth {
+    border-top: 0.2em solid #FFF;
+    background-color: #FFF;
+    animation: speak-mouth 1.0s infinite ease alternate;
+}
+
+@keyframes speak-mouth {
+    0% {
+        width: 10%;
+        height: 4%;
+        left: 45%;
+    }
+
+    25% {
+        width: 30%;
+        height: 10%;
+        left: 35%;
+    }
+
+    50% {
+        width: 6%;
+        height: 4%;
+        left: 47%;
+    }
+
+    75% {
+        width: 40%;
+        height: 8%;
+        left: 30%;
+    }
+
+    100% {
+        width: 30%;
+        height: 4%;
+        left: 35%;
+    }
+}
+
+/* Listening */
+#bot.listening #left-eye,
+#bot.listening #right-eye {
+    background-color: lightgreen;
+    border-radius: 1em;
+    transition: border-radius 0.25s linear;
+    animation: none;
+}
+
+#bot.listening #left-ear,
+#bot.listening #right-ear,
+#bot.listening #left-ear-inner,
+#bot.listening #right-ear-inner {
+    background-color: lightgreen;
+}
+
+#bot.listening #face,
+#bot.listening #left-ear,
+#bot.listening #right-ear {
+    border-color: lightgreen;
+    transition: border-color 0.25s linear;
+}
+
+#bot.listening #left-ear-inner,
+#bot.listening #right-ear-inner {
+    animation: border-bump 0.4s infinite ease alternate;
+    animation-delay: 0.5s;
+}
+
+@keyframes border-bump {
+    0% {
+        outline: 0.4em dotted lightgreen;
+    }
+
+    100% {
+        outline: 0.2em dotted black;
+    }
+}
+
+
+/* Computing */
+#bot.computing #left-eye,
+#bot.computing #right-eye {
+    height: 100%;
+    width: 25%;
+    border-radius: 100%;
+    transition: all 0.25s linear;
+    border: 0.3em dashed black;
+    animation-delay: 0.5s;
+    background-color: #99FFFF;
+}
+
+#bot.computing #left-eye {
+    animation: border-dance 1s infinite linear reverse;
+}
+
+#bot.computing #right-eye {
+    animation: border-dance 1s infinite linear;
+}
+
+#bot.computing #face,
+#bot.computing #left-ear,
+#bot.computing #right-ear,
+#bot.computing #left-ear-inner,
+#bot.computing #right-ear-inner {
+    border-color: #99FFFF;
+    transition: border-color 0.25s linear;
+}
+
+#bot.computing #left-ear,
+#bot.computing #right-ear,
+#bot.computing #left-ear-inner,
+#bot.computing #right-ear-inner {
+    background-color: #99FFFF;
+    transition: background-color 0.25s linear;
+    animation: none;
+}
+
+#bot.computing #mouth {
+    border: 0.5em solid #FFF;
+    width: 10%;
+    left: 45%;
+}
+
+@keyframes border-dance {
+    100% {
+        transform: rotateZ(360deg);
+    }
 }
